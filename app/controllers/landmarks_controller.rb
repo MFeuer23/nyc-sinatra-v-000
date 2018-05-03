@@ -5,28 +5,12 @@ class LandmarksController < ApplicationController
     erb :'/landmarks/index'
   end
 
-  get "/figures/new" do
+  get "/landmarks/new" do
     erb :'/landmarks/new'
   end
 
-  post "/figures" do
-    @figure = Figure.new(name: params["figure"]["name"])
-
-    if params["figure"]["title_ids"]
-      params["figure"]["title_ids"].each do |id|
-       @figure.titles << Title.find(id)
-      end
-    elsif !params["title"]["name"].empty?
-      @figure.titles << Title.create(name: params["title"]["name"])
-    end
-    if params["figure"]["landmark_ids"]
-      params["figure"]["landmark_ids"].each do |id|
-       @figure.landmarks << Landmark.find(id)
-      end
-    elsif !params["landmark"]["name"].empty?
-      @figure.landmarks << Landmark.create(name: params["landmark"]["name"])
-    end
-    @figure.save
+  post "/landmarks" do
+    @landmarks = Landmark.create(params["landmark"])
     redirect "/figures/#{@figure.id}"
   end
 
