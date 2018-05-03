@@ -1,12 +1,14 @@
-class LandmarksController < ApplicationController
+class FiguresController < ApplicationController
 
-  get "/landmarks" do
-    @landmarks = Landmark.all
-    erb :'/landmarks/index'
+  get "/figures" do
+    @figures = Figure.all
+    erb :'/figures/index'
   end
 
   get "/figures/new" do
-    erb :'/landmarks/new'
+    @titles = Title.all
+    @landmarks = Landmark.all
+    erb :'/figures/new'
   end
 
   post "/figures" do
